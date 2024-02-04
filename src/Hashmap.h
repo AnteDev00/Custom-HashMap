@@ -60,28 +60,26 @@ public:
         int listIndex = Hash(_Keyword); 
 		if (m_Hashmap[listIndex] == nullptr)
 			throw std::out_of_range("Keyword not found");
-		// find element index
-        int index = m_Hashmap[listIndex]->FindIndex(_Keyword); 
-		// return element
-		if (index == -1)
-            throw std::out_of_range("Keyword not found");
-        else 
-		    return m_Hashmap[listIndex]->NodeAt(index); 
+		else
+		{
+			return m_Hashmap[listIndex]->Find(_Keyword);
+		}
+        
     }
 
     void Delete(const type& _Keyword)
     {
 		// find list index
         int listIndex = Hash(_Keyword); 
+		
+		// check if list is empty
 		if (m_Hashmap[listIndex] == nullptr)
 			throw std::out_of_range("Keyword not found");
-		// find element index
-        int index = m_Hashmap[listIndex]->FindIndex(_Keyword);
-		// delete element
-		if (index == -1)
-			throw std::out_of_range("Keyword not found");
 		else
-    		m_Hashmap[listIndex]->DeleteAt(index); 
+		{
+			// delete element
+			m_Hashmap[listIndex]->Delete(_Keyword); 
+		}
     }
 public:
 	void GetCollisions() const { return m_Collisions; }

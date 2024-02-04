@@ -20,8 +20,8 @@ void PrintDuration(const double& _avgDurInSec, const std::string& _operation)
 	double MilionOpPerSec = operationsPerSec / 1'000'000.0;
 
 	// Log to console
-	std::cout << "\nAverage " << _operation << " time:\n";
-	std::cout << durationInNanoSec << " nanoseconds.  (or: " << _avgDurInSec << " seconds)\n"
-			  << MilionOpPerSec << " milion operations/sec.  (or: " << operationsPerSec << " operations/sec)";
+	std::cout << "\nAverage " << _operation << " time:\n"
+		<< durationInNanoSec << " nanoseconds (or: " << _avgDurInSec << " seconds)\n";
+	std::cout << "\nThat is: " << MilionOpPerSec << " milion operations/sec.  (or: " << operationsPerSec << " operations/sec)";
 	std::cout << "\n------------------------------------------------------------\n";
 }
