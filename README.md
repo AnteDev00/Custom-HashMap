@@ -1,4 +1,4 @@
-# Custom C++ Hashmap
+# Custom Hashmap
 
 My attempt at creating fast hashmap class (with a doubly linked list class), offering efficient key-value storage and retrieval.
 
