@@ -1,4 +1,4 @@
-# HashMap
+# Custom HashMap
 
 My attempt at creating fast hashmap implementation (with a doubly linked list), offering efficient key-value storage and retrieval.
 
