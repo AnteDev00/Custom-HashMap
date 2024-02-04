@@ -6,20 +6,11 @@
 
 
 // Header-only, templated Hashmap class, with a custom Doubly Linked list implementation
-
 // Supports: Insert, Find, Delete and GetMapSize, GetKeySize, GetCollisions
 
 template<typename type>
 class Hashmap
 {
-private:
-	//std::array<List<type>*, int m_MapSize> m_Hashmap; // actual hashmap
-	std::vector<List<type>*> m_Hashmap; // actual hashmap
-    int m_MapSize; // size of the map
-	int m_KeySize; // number of elements in the map
-	int m_Collisions; // number of elements with same hash
-private:
-	inline int Hash(const type& _Keyword) const { return std::hash<type>{}(_Keyword) % m_MapSize; } // Hash function
 public:
 	Hashmap(int _MapSize) {
 		if (_MapSize <= 0) 
@@ -53,7 +44,6 @@ public:
 			m_Collisions++; // increase collisions
 		}
     }
-
     type& Find(const type& _Keyword)
     {
 		// find list index
@@ -66,7 +56,6 @@ public:
 		}
         
     }
-
     void Delete(const type& _Keyword)
     {
 		// find list index
@@ -85,4 +74,12 @@ public:
 	void GetCollisions() const { return m_Collisions; }
 	void GetMapSize() const { return m_MapSize; }
 	void GetKeySize() const { return m_KeySize; }
+private:
+	//std::array<List<type>*, int m_MapSize> m_Hashmap; // actual hashmap
+	std::vector<List<type>*> m_Hashmap; // actual hashmap
+    int m_MapSize; // size of the map
+	int m_KeySize; // number of elements in the map
+	int m_Collisions; // number of elements with same hash
+private:
+	inline int Hash(const type& _Keyword) const { return std::hash<type>{}(_Keyword) % m_MapSize; } // Hash function
 };

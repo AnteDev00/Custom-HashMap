@@ -2,6 +2,7 @@
 #include <iostream>
 #include <chrono>
 
+#include <iomanip> // std::setprecision
 
 template <typename Func>
 double MeasureTime(Func _Func) 
@@ -20,8 +21,5 @@ void PrintDuration(const double& _avgDurInSec, const std::string& _operation)
 	double MilionOpPerSec = operationsPerSec / 1'000'000.0;
 
 	// Log to console
-	std::cout << "\nAverage " << _operation << " time:\n"
-		<< durationInNanoSec << " nanoseconds (or: " << _avgDurInSec << " seconds)\n";
-	std::cout << "\nThat is: " << MilionOpPerSec << " milion operations/sec.  (or: " << operationsPerSec << " operations/sec)";
-	std::cout << "\n------------------------------------------------------------\n";
+	std::cout << "\nAverage " << _operation << " time:\t" << durationInNanoSec << " Nanoseconds" << "\tor\t" << MilionOpPerSec << " Milion op/s\n";
 }

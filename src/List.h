@@ -6,20 +6,8 @@
 // Supports: AddFront, AddBack, AddAt, DeleteFront, DeleteBack, DeleteAt, ReadList, FindAt, FindIndex, DoesExist, IsEmpty, GetSize
 
 template<typename type>
-class List {
-private:
-    struct Node
-    {
-        type m_Data;
-        Node* m_Next;
-        Node* m_Prev;
-
-        Node(const type& _data) : m_Data(_data), m_Next(nullptr), m_Prev(nullptr) {}
-    };
-    Node* m_Head;
-    Node* m_Tail;
-    int m_Size;
-
+class List 
+{
 public:
     List()
     {
@@ -29,7 +17,6 @@ public:
         m_Tail->m_Prev = m_Head;
         m_Size = 0;
     }
-
     ~List()
     {
         while (m_Head != nullptr)
@@ -39,9 +26,8 @@ public:
             delete temp;
         }
     }
-    
+public:
     // Add methods
-
     void AddFront(const type& m_Data) 
     {
         Node* newNode = new Node(m_Data);
@@ -51,7 +37,6 @@ public:
         m_Head->m_Next = newNode;
         m_Size++;
     }
-
     void AddBack(const type& m_Data) 
     {
         Node* newNode = new Node(m_Data);
@@ -61,7 +46,6 @@ public:
         m_Tail->m_Prev = newNode;
         m_Size++;
     }
-
     void AddAt(const type& m_Data, const int& _Index)
     {
         if (_Index > m_Size || _Index < 0) return;
@@ -80,9 +64,8 @@ public:
         temp->m_Next = newNode;
         m_Size++;
     }
-
+public:
     // Delete methods
-
     void DeleteFront() 
     {
         if (m_Head->m_Next == m_Tail) // if there is nothing to delete
@@ -96,7 +79,6 @@ public:
 		delete temp; // delete element
         m_Size--;
     }
-
     void DeleteBack() 
     {
         if (m_Tail->m_Prev == m_Head) // if there is nothing to delete
@@ -110,7 +92,6 @@ public:
 		delete temp; // delete element
         m_Size--;
     }
-
     void Delete(type m_Data)
     {
         // if there is nothing to find
@@ -136,7 +117,6 @@ public:
         delete temp;  // delete element
         m_Size--;
     }
-
     void DeleteAt(int _Index)
     {
         if (m_Size == 0) // if there is nothing to delete
@@ -160,10 +140,8 @@ public:
 		delete temp;  // delete element
         m_Size--;
     }
-    
-
-	// Read methods
-
+public:
+	// Find methods
     type& Find(type _Data)
 	{
 		// if there is nothing to find
@@ -181,7 +159,6 @@ public:
         throw std::out_of_range("Index out of bounds");
 
     }
-
     type& FindAt(int _Index)
     {
         // if indecies are small, brute force way // 30% faster
@@ -203,7 +180,6 @@ public:
         }
         return temp->m_Data;
     }
-
     int FindIndex(type _Data)
     {
         // if there is nothing to find 
@@ -218,27 +194,12 @@ public:
         }
 		return -1;
     }
-
-    void ReadList() {
-        // if there is nothing to read
-        if (m_Size == 0)
-        {
-			std::cout << "List is empty" << std::endl;
-            return;
-        }
-
-        Node* temp = m_Head->m_Next;
-        std::cout << "Elements of List are: " << std::endl;
-        while (temp != m_Tail) 
-        {
-            std::cout << temp->m_Data << " ";
-            temp = temp->m_Next;
-        }
-        std::cout << std::endl;
+public:
+	// Other methods
+    inline int GetSize()
+    {
+        return m_Size;
     }
-
-	// Check methods
-
     bool DoesExist(type m_Data)
     {
         // if there is nothing to find
@@ -256,7 +217,6 @@ public:
         }
         return false; // if element doesn't exist
     }
-
     inline bool IsEmpty()
     {
         if (m_Size <= 0) 
@@ -264,12 +224,34 @@ public:
         else
             return false;
     }
+    void ReadList() {
+        // if there is nothing to read
+        if (m_Size == 0)
+        {
+			std::cout << "List is empty" << std::endl;
+            return;
+        }
 
-	// Get methods
-
-    inline int GetSize()
-    {
-        return m_Size;
+        Node* temp = m_Head->m_Next;
+        std::cout << "Elements of List are: " << std::endl;
+        while (temp != m_Tail) 
+        {
+            std::cout << temp->m_Data << " ";
+            temp = temp->m_Next;
+        }
+        std::cout << std::endl;
     }
+private:
+	// Data structure
+    struct Node
+    {
+        type m_Data;
+        Node* m_Next;
+        Node* m_Prev;
 
+        Node(const type& _data) : m_Data(_data), m_Next(nullptr), m_Prev(nullptr) {}
+    };
+    Node* m_Head;
+    Node* m_Tail;
+    int m_Size;
 };
