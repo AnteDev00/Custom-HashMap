@@ -1,6 +1,6 @@
 # Custom C++ Hashmap
 
-My attempt at creating fast hashmap implementation (with a doubly linked list), offering efficient key-value storage and retrieval.
+My attempt at creating fast hashmap class (with a doubly linked list class), offering efficient key-value storage and retrieval.
 
 Developed in VS 2022.
 
