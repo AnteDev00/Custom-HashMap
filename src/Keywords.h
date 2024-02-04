@@ -14,7 +14,3 @@ std::vector<std::string> Keywords = {
     "struct", "switch", "synchronized", "template", "this", "thread_local", "throw", "true", "try", "typedef",
     "typeid", "typename", "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t", "while"
 };
-
-const int KEYWORD_SIZE = Keywords.size(); // 90 elem
-
-const int MAP_SIZE = Keywords.size() * 1.45; // LOAD Factor ~ 70%

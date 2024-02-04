@@ -23,10 +23,13 @@
     <ClInclude Include="src\List.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Keywords.h">
+    <ClInclude Include="src\Hashmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hashmap.h">
+    <ClInclude Include="src\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Keywords.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,108 +1,90 @@
 #pragma once
-#include "Keywords.h"
+#include "List.h"
 
-#include <functional> // For std::forward
-
-#include <iostream>
-#include <chrono>
+#include <functional> // For std::fucntion
+#include <vector>
 
 
-// This header file holds functions necessary to do the testing of the hash map
+// Header-only, templated Hashmap class, with a custom Doubly Linked list implementation
 
+// Supports: Insert, Find, Delete and GetMapSize, GetKeySize, GetCollisions
 
-
-using namespace std; // I dont ususally use it, but for this project its pretty handy 
-
-template <typename FuncType, typename... Args>
-double MeasureFunctionTime(FuncType functionToMeasure, Args&&... args)
+template<typename type>
+class Hashmap
 {
-    auto start = std::chrono::high_resolution_clock::now();
-    functionToMeasure(std::forward<Args>(args)...); // Forward arguments
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-    return static_cast<double>(duration.count() / KEYWORD_SIZE);
-}
-
-inline int Hash(const string& _Keyword)
-{
-    return hash<string>{}(_Keyword) % MAP_SIZE;
-}
-
-// Insert
-void FillHashMap(vector<List<string>*>& _HashMap, vector<string>& _Keywords)
-{
-    // Fill the vector with Keywords
-    for (int i = 0; i < KEYWORD_SIZE; i++)
+private:
+	//std::array<List<type>*, int m_MapSize> m_Hashmap; // actual hashmap
+	std::vector<List<type>*> m_Hashmap; // actual hashmap
+    int m_MapSize; // size of the map
+	int m_KeySize; // number of elements in the map
+	int m_Collisions; // number of elements with same hash
+private:
+	inline int Hash(const type& _Keyword) const { return std::hash<type>{}(_Keyword) % m_MapSize; } // Hash function
+public:
+	Hashmap(int _MapSize) {
+		if (_MapSize <= 0) 
+        {
+			throw std::out_of_range("Invalid map size");
+		}
+		m_Hashmap.resize(_MapSize);
+		m_MapSize = _MapSize;
+		m_KeySize = 0;
+		m_Collisions = 0;
+	}
+	~Hashmap() 
+    { 
+	    for(List<type>* list : m_Hashmap)
+	    {
+		    delete list;
+	    }
+    } 
+public:
+	void Insert(const type& _Keyword) 
     {
-        int hashIndex = Hash(Keywords[i]); // Calculate the hash
-        if (_HashMap[hashIndex] == nullptr)  // If it's the first element with that hash, create a new linked list
-        {
-            _HashMap[hashIndex] = new List<string>();
-            _HashMap[hashIndex]->AddBack(Keywords[i]);
-        }
-        else // if it's not first elem
-        {
-            _HashMap[hashIndex]->AddBack(Keywords[i]);
-        }
+		int listIndex = Hash(_Keyword); // find index
+		if (m_Hashmap[listIndex] == nullptr) // if its the first element
+		{
+            m_Hashmap[listIndex] = new List<type>(); // create a new list
+			m_Hashmap[listIndex]->AddBack(_Keyword); // add to the list
+		}
+		else // collision happened
+		{
+			m_Hashmap[listIndex]->AddBack(_Keyword); // add to an existing list
+			m_Collisions++; // increase collisions
+		}
     }
-}
 
-// Lookup
-void LookUpAllElements(vector<List<string>*>& _HashMap, vector<string>& _Keywords)
-{
-    // Finds all elements by their hashes
-    for (int i = 0; i < KEYWORD_SIZE; i++)
+    type& Find(const type& _Keyword)
     {
-        int hashIndex = Hash(Keywords[i]); // Calc the hash, truncate it to fit MAP_SIZE
-        int listIndex = _HashMap[hashIndex]->FindIndex(Keywords[i]); // Find the INDEX of element
-        string keyword = _HashMap[hashIndex]->NodeAt(listIndex); // Access the element
-    }
-}
-
-// Delete
-void DeleteHashMap(vector<List<string>*>& _HashMap)
-{
-    for (int i = 0; i < KEYWORD_SIZE; i++)
-        if (_HashMap[i] != nullptr)
-        {
-            int listSize = _HashMap[i]->GetSize();
-
-            for (int j = 0; j < listSize; j++)
-                _HashMap[i]->DeleteBack();
-        }
-}
-
-void PrintDuration(const double& _avgDuration, const std::string& _operation)
-{
-    const int nanosecInSec = 1'000'000'000;
-    double MOperationsPerSec = (nanosecInSec / _avgDuration) / 1'000'000; 
-
-    // Log to console
-    cout << "\nAverage " << _operation << " time:\n" << "Best case scenario, " << _avgDuration << " nanoseconds, ";
-    cout << "which is: " << MOperationsPerSec << " Milion Operations/s\n";
-    cout << "\n------------------------------------------------------------\n";
-}
-
-void PrintCollisionsStats(vector<List<string>*>& _HashMap)
-{
-	int collisions = 0;
-    
-    // Calculating collisions
-    for (int i = 0; i < MAP_SIZE; i++)
-    {
-        if (_HashMap[i] == nullptr
-            || _HashMap[i]->IsEmpty())
-        {
-            continue;
-        }
+		// find list index
+        int listIndex = Hash(_Keyword); 
+		if (m_Hashmap[listIndex] == nullptr)
+			throw std::out_of_range("Keyword not found");
+		// find element index
+        int index = m_Hashmap[listIndex]->FindIndex(_Keyword); 
+		// return element
+		if (index == -1)
+            throw std::out_of_range("Keyword not found");
         else 
-        {
-            collisions = collisions + _HashMap[i]->GetSize() - 1;
-        }
+		    return m_Hashmap[listIndex]->NodeAt(index); 
     }
-    // Printing
-    cout << "\nNumber of Resolved Collisions: " << collisions << "\n";
-}
 
-
+    void Delete(const type& _Keyword)
+    {
+		// find list index
+        int listIndex = Hash(_Keyword); 
+		if (m_Hashmap[listIndex] == nullptr)
+			throw std::out_of_range("Keyword not found");
+		// find element index
+        int index = m_Hashmap[listIndex]->FindIndex(_Keyword);
+		// delete element
+		if (index == -1)
+			throw std::out_of_range("Keyword not found");
+		else
+    		m_Hashmap[listIndex]->DeleteAt(index); 
+    }
+public:
+	void GetCollisions() const { return m_Collisions; }
+	void GetMapSize() const { return m_MapSize; }
+	void GetKeySize() const { return m_KeySize; }
+};

@@ -140,8 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hashmap.h" />
-    <ClInclude Include="src\Keywords.h" />
     <ClInclude Include="src\List.h" />
+    <ClInclude Include="src\Keywords.h" />
+    <ClInclude Include="src\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,11 +1,9 @@
 #pragma once
 #include <iostream>
 
-// Templated Doubly Linked List class
-// for primitive types only
+// Header-only, templated Doubly Linked List class
 
-// Supports: AddFront, AddBack, AddAt, DeleteFront, DeleteBack, DeleteAt, 
-//  ReadList, NodeAt, FindIndex, DoesExist, IsEmpty, GetSize
+// Supports: AddFront, AddBack, AddAt, DeleteFront, DeleteBack, DeleteAt, ReadList, NodeAt, FindIndex, DoesExist, IsEmpty, GetSize
 
 template<typename type>
 class List {
@@ -87,50 +85,81 @@ public:
 
     void DeleteFront() 
     {
-        // if there is nothing to delete
-        if (m_Head->m_Next == m_Tail) 
+        if (m_Head->m_Next == m_Tail) // if there is nothing to delete
             return;
 
+		// Adjust previous and next pointers
         Node* temp = m_Head->m_Next;
         m_Head->m_Next = temp->m_Next;
         temp->m_Next->m_Prev = m_Head;
 
-        delete temp;
+		delete temp; // delete element
         m_Size--;
     }
 
     void DeleteBack() 
     {
-        // if there is nothing to delete
-        if (m_Tail->m_Prev == m_Head) 
+        if (m_Tail->m_Prev == m_Head) // if there is nothing to delete
             return;
 
+		// Adjust previous and next pointers
         Node* temp = m_Tail->m_Prev;
         m_Tail->m_Prev = temp->m_Prev;
         temp->m_Prev->m_Next = m_Tail;
 
-        delete temp;
+		delete temp; // delete element
         m_Size--;
     }
 
     void DeleteAt(int index) 
     {
-		// if there is nothing to delete
-        if (m_Head->m_Next == m_Tail || index >= m_Size || index < 0) 
+        if (m_Size == 0) // if there is nothing to delete
             return;
 
+        // find element with that index
         Node* temp = m_Head->m_Next;
-        for (int i = 0; i < index; i++)
+        for (int i = 0; i < m_Size; i++) 
         {
-            if (temp->m_Next == m_Tail) break;
+            if (i == index) break;
             temp = temp->m_Next;
         }
+
+		if (temp == m_Tail) 
+            return; // if index is out of range
+
+		// Adjust previous and next pointers
         temp->m_Prev->m_Next = temp->m_Next;
         temp->m_Next->m_Prev = temp->m_Prev;
 
-        delete temp;
+		delete temp;  // delete element
         m_Size--;
     }
+    
+    void Delete(type m_Data)
+    {
+        if (m_Size == 0) 
+            return; // if there is nothing to delete
+
+        Node* temp = m_Head->m_Next;
+        // find element with that index
+        for (int i = 0; i < m_Size; i++)
+        {
+            if (m_Data == temp->m_Data)
+                break;
+            temp = temp->m_Next;
+        }
+
+        if (temp == m_Tail)
+            return; // if index is out of range
+
+        // Adjust previous and next pointers
+        temp->m_Prev->m_Next = temp->m_Next;
+        temp->m_Next->m_Prev = temp->m_Prev;
+
+        delete temp;  // delete element
+        m_Size--;
+    }
+
 
 	// Read methods
 
@@ -186,6 +215,7 @@ public:
             if (m_Data == temp->m_Data) return i;
             temp = temp->m_Next;
         }
+		return -1;
     }
 
 	// Check methods
