@@ -16,7 +16,7 @@ extern std::vector<std::string> Keywords; // DEFINED IN "Keywords.h"
 
 int main() 
 {
-    int hashmapSize = Keywords.size() * 1.0; // increasing map size, increases performance! 
+    int hashmapSize = Keywords.size() * 1.45; // increasing map size, increases performance! 
 	Hashmap<std::string> hashmap(hashmapSize);
     std::vector<std::string> operations = { "Insert", "Lookup", "Delete" }; // operations that we are testing
 
@@ -25,22 +25,23 @@ int main()
 	{
         double totalTime = MeasureTime([&hashmap, &operation]()
             {
-                if (operation == "Insert")
+                // testing Insert operation
+				if (operation == "Insert") 
                 {
                     for (const std::string& keyword : Keywords)
                     {
                         hashmap.Insert(keyword);
                     }
                 }
-
-                else if (operation == "Lookup")
+                // testing Lookup operation
+				else if (operation == "Lookup") 
                 {
                     for (const std::string& keyword : Keywords)
                     {
                         hashmap.Find(keyword);
                     }
                 }
-
+				// testing Delete operation
                 else if (operation == "Delete")
                 {
                     for (const std::string& keyword : Keywords)
