@@ -17,7 +17,7 @@ public:
         {
 			throw std::out_of_range("Invalid map size");
 		}
-		m_Hashmap.resize(_MapSize);
+		m_Hashmap.resize(_MapSize); // Sets size and capacity, and null-initializes all elements
 		m_MapSize = _MapSize;
 		m_KeySize = 0;
 		m_Collisions = 0;
@@ -75,11 +75,10 @@ public:
 	void GetMapSize() const { return m_MapSize; }
 	void GetKeySize() const { return m_KeySize; }
 private:
-	//std::array<List<type>*, int m_MapSize> m_Hashmap; // actual hashmap
 	std::vector<List<type>*> m_Hashmap; // actual hashmap
     int m_MapSize; // size of the map
 	int m_KeySize; // number of elements in the map
 	int m_Collisions; // number of elements with same hash
 private:
-	inline int Hash(const type& _Keyword) const { return std::hash<type>{}(_Keyword) % m_MapSize; } // Hash function
+	inline int Hash(const type& _Keyword) const { return std::hash<type>{}(_Keyword) % m_MapSize; }
 };
