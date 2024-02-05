@@ -7,7 +7,7 @@
 #include <string>
 
 
-// ------------------- Testing Custom Hashmap class ---------------------
+// ------------------- Testing Hashmap Performance ---------------------
 
 
 // Test subject
