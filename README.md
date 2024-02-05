@@ -6,11 +6,11 @@ My attempt at creating fast hashmap class (with a doubly linked list class), off
 Developed in VS 2022.
 
 ## Dependencies
-Visual studio 
+- Visual studio 
 
-##Code Examples
+## Code Examples
 
-##Support
+## Support
 If you have any questions, please reach out at [ante-piskovic@hotmail.com](mailto:ante-piskovic@hotmail.com)
 
 ## Single threaded perfomace (Using Ryzing 2600x)
