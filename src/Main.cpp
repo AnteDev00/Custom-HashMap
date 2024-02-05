@@ -7,7 +7,7 @@
 #include <string>
 
 
-// ------------------- Testing Custom Hashmap class ---------------------
+// ------------------- Testing Hashmap Performance ---------------------
 
 
 // Test subject
@@ -26,7 +26,7 @@ int main()
         double totalTime = MeasureTime([&hashmap, &operation]()
             {
                 // testing Insert operation
-				if (operation == "Insert") 
+		if (operation == "Insert") 
                 {
                     for (const std::string& keyword : Keywords)
                     {
@@ -34,7 +34,7 @@ int main()
                     }
                 }
                 // testing Lookup operation
-				else if (operation == "Lookup") 
+		else if (operation == "Lookup") 
                 {
                     for (const std::string& keyword : Keywords)
                     {

@@ -2,7 +2,6 @@
 #include <iostream>
 
 // Header-only, templated Doubly Linked List class, not thread safe
-
 // Supports: AddFront, AddBack, AddAt, DeleteFront, DeleteBack, DeleteAt, ReadList, FindAt, FindIndex, DoesExist, IsEmpty, GetSize
 
 template<typename type>

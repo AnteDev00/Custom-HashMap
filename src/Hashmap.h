@@ -5,7 +5,7 @@
 #include <vector>
 
 
-// Header-only, templated Hashmap class, with a custom Doubly Linked list implementation
+// Header-only, templated Hashmap class, with a custom Doubly Linked list implementation, also not thread-safe
 // Supports: Insert, Find, Delete and GetMapSize, GetKeySize, GetCollisions
 
 template<typename type>
