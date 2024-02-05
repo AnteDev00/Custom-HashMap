@@ -30,6 +30,7 @@ public:
 	    }
     } 
 public:
+	// Methods
 	void Insert(const type& _Keyword) 
     {
 		int listIndex = Hash(_Keyword); // find index
@@ -71,14 +72,16 @@ public:
 		}
     }
 public:
+	// Getters
 	void GetCollisions() const { return m_Collisions; }
 	void GetMapSize() const { return m_MapSize; }
 	void GetKeySize() const { return m_KeySize; }
 private:
+	inline int Hash(const type& _Keyword) const { return std::hash<type>{}(_Keyword) % m_MapSize; }
+private:
+	// Data
 	std::vector<List<type>*> m_Hashmap; // actual hashmap
     int m_MapSize; // size of the map
 	int m_KeySize; // number of elements in the map
 	int m_Collisions; // number of elements with same hash
-private:
-	inline int Hash(const type& _Keyword) const { return std::hash<type>{}(_Keyword) % m_MapSize; }
 };
