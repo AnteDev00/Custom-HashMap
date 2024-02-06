@@ -12,7 +12,7 @@ Developed in VS 2022.
 (Single threaded on Ryzen 2600x)
 #
 ## Support
-If you have any questions, please reach out at [ante-piskovic@hotmail.com](mailto:ante-piskovic@hotmail.com)
+If you have any questions, reach out at [ante-piskovic@hotmail.com](mailto:ante-piskovic@hotmail.com)
 #
 ## License
 Licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
