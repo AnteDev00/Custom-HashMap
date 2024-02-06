@@ -4,7 +4,6 @@ My attempt at creating fast hashmap class (with a doubly linked list class), off
 
 Uses Closed Addressing with a Doubly-Linked List for collision resolution.
 
-Developed in VS 2022. 
 #
 ## Perfomace
 ![image](https://github.com/AnteDev00/Custom-Hashmap/assets/151842550/a6432ea1-0ae1-4fa6-a5aa-474827dacf76)
