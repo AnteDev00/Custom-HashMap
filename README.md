@@ -15,5 +15,5 @@ Developed in VS 2022.
 If you have any questions, please reach out at [ante-piskovic@hotmail.com](mailto:ante-piskovic@hotmail.com)
 #
 ## License
-[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+Licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
