@@ -8,7 +8,7 @@ Uses Closed Addressing with a Doubly-Linked List for collision resolution.
 ## Perfomace
 ![image](https://github.com/AnteDev00/Custom-Hashmap/assets/151842550/a6432ea1-0ae1-4fa6-a5aa-474827dacf76)
 
-(Single threaded on Ryzen 2600x)
+Single threaded performance on Ryzen 2600x
 #
 ## Support
 If you have any questions, reach out at [ante-piskovic@hotmail.com](mailto:ante-piskovic@hotmail.com)
