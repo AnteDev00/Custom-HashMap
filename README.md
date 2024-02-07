@@ -5,7 +5,11 @@ My attempt at creating fast hashmap class (with a doubly linked list class), off
 Uses Closed Addressing with a Doubly-Linked List for collision resolution.
 
 ## Performance Test
-The test contains Insertion, Lookup and Delete opretations ... WRITE MORE
+The test contains of 90 Insertion, 90 Lookup and 90 Delete opretations.
+
+The time took to finish those oprerations is measured.
+
+The average time for each operation is calculated and displayed.
 
 #
 ## Perfomace Results
